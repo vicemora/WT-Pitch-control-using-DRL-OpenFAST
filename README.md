@@ -15,4 +15,29 @@ Specifically, you will need the following files from the release:
 - `OpenFAST-Simulink_x64.dll`: The shared library required for running OpenFAST as a Simulink block.
 - `FAST_SFunc.mexw64`: The compiled S-Function that interfaces Simulink with OpenFAST.
 
-To set up the interface copy both files to a folder within a directory (e.g., lib/openfast/) and add that folder to the MATLAB path.
+To set up the interface copy both files to a folder with\in a directory (e.g., lib/openfast/) and add that folder to the MATLAB path.
+
+
+## 2. OpenFAST IEA 3.4 MW RWT Model
+
+All simulations in this work are based on the **IEA Wind Task 37 3.4 MW Reference Wind Turbine (RWT)** model — a land-based turbine developed for system-level engineering studies.
+
+**[IEA-3.4-130-RWT – GitHub Repository](https://github.com/WISDEM/IEA-3.4-130-RWT)**
+
+It includes the primary input file (.fst)  and module input files (.dat) for ElastoDyn, ServoDyn, AeroDyn, InflowWind, etc.
+
+### ROSCO Controller Integration
+
+There are to ways to integrate the NREL ROSCO controller for this wind turbine model.
+
+First by using ROSCO dynamic library
+
+1. Locate the **“Bladed Interface”** section within the `ServoDyn` input file.
+2. Set the `DLL_FileName` field to point to the `libdiscon.dll` file.
+
+> 🔗 **[Download libdiscon.dll – NREL/ROSCO Releases](https://github.com/NREL/ROSCO/releases)**
+
+### ⚠️ Important Notes
+
+- Make sure the `libdiscon.dll` version **matches** the ROSCO version referenced by the `DISCON.IN` file.
+- If using a different wind turbine model, repeat this setup and version-matching process accordingly.
