@@ -22,22 +22,26 @@ To set up the interface copy both files to a folder with\in a directory (e.g., l
 
 All simulations in this work are based on the **IEA Wind Task 37 3.4 MW Reference Wind Turbine (RWT)** model — a land-based turbine developed for system-level engineering studies.
 
+The turbine model is available at:
+
 **[IEA-3.4-130-RWT – GitHub Repository](https://github.com/WISDEM/IEA-3.4-130-RWT)**
 
-It includes the primary input file (.fst)  and module input files (.dat) for ElastoDyn, ServoDyn, AeroDyn, InflowWind, etc.
+The repository includes the primary input file (.fst) and module input files (.dat) for ElastoDyn, ServoDyn, AeroDyn, InflowWind, and other necessary files for OpenFAST simulation.
 
-### ROSCO Controller Integration
+### Controller integration
 
-There are to ways to integrate the NREL ROSCO controller for this wind turbine model.
+In this work, the ROSCO controller is used to obtain an initial informed control policy.
 
-First by using ROSCO dynamic library
+There are two ways to utilize the NREL ROSCO (pitch) controller for this wind turbine model:
+
+#### Option 1: Dynamic Library Integration (Recommended)
 
 1. Locate the **“Bladed Interface”** section within the `ServoDyn` input file.
-2. Set the `DLL_FileName` field to point to the `libdiscon.dll` file.
+2. Set the `DLL_FileName` field to point to the `libdiscon.dll` file. [Download from NREL/ROSCO Releases](https://github.com/NREL/ROSCO/releases)
+3. Ensure that the `PCMode` option in the `ServoDyn` input file is set to `5`, which enables the external controller. 
 
-> 🔗 **[Download libdiscon.dll – NREL/ROSCO Releases](https://github.com/NREL/ROSCO/releases)**
+#### Option 2: Simulink Block Integration
 
-### ⚠️ Important Notes
+An alternative approach involves using the ROSCO controller as a Simulink block. This can be constructed from the ROSCO toolbox files available in the repository: https://github.com/NREL/ROSCO/tree/main/Matlab_Toolbox
 
-- Make sure the `libdiscon.dll` version **matches** the ROSCO version referenced by the `DISCON.IN` file.
-- If using a different wind turbine model, repeat this setup and version-matching process accordingly.
+**Note:** The ROSCO Simulink toolbox is no longer actively maintained. Therefore, compatibility issues and errors might be possible. For this reason, we prefer the first option (further considerations for this approach are discussed later in the repository). However, we present this second option because it offers a pathway to generalize policy transfer to other controllers (not ROSCO) and turbine models within the Simulink environment. 
