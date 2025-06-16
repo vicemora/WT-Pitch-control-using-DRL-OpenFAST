@@ -49,7 +49,7 @@ An alternative approach involves using the ROSCO controller as a Simulink block.
 
 ## 3. Policy Transfer
 
-The c directory contains the necessary files to **train** and **evaluate** an agent using the **policy transfer** approach.
+The `Simulink` directory contains the necessary files to **train** and **evaluate** an agent using the **policy transfer** approach.
 
 ### OpenFAST Configuration – Policy transfer training
 
@@ -84,7 +84,6 @@ To test the refined policy, use the same configuration as above:
 
 - `PCMode = 4`  
 - `VSContrl = 5`
-
 
 
 `Implementation notes:`   
