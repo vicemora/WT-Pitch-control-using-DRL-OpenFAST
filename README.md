@@ -47,6 +47,54 @@ An alternative approach involves using the ROSCO controller as a Simulink block.
 **Note:** The ROSCO Simulink toolbox is no longer actively maintained. Therefore, compatibility issues and errors might be possible. For this reason, we prefer the first option (further considerations for this approach are discussed later in the repository). However, we present this second option because it offers a pathway to generalize policy transfer to other controllers (not ROSCO) and turbine models within the Simulink environment. 
 
 
-## 2. Policy transfer
+## 3. Policy Transfer
+
+The c directory contains the necessary files to **train** and **evaluate** an agent using the **policy transfer** approach.
+
+### OpenFAST Configuration – Policy transfer training
+
+To enable policy transfer training, set the following parameters in the `ServoDyn` module:
+
+- `PCMode = 5`  
+- `VSContrl = 5`
+
+### OpenFAST Configuration – Policy transfer testing
+
+To evaluate a transferred policy in testing mode, configure the `ServoDyn` module as follows:
+
+- `PCMode = 4`  
+- `VSContrl = 5`
+
+---
+
+## 4. Policy Refinement
+
+The `Simulink` directory also contains the necessary files to **train** and **evaluate** an agent using the **policy refinement** approach.
+
+### OpenFAST Configuration – Policy refinement training
+
+For training in refinement mode, set the following in `ServoDyn`:
+
+- `PCMode = 4`  
+- `VSContrl = 5`
+
+### OpenFAST Configuration – Policy refinement testing
+
+To test the refined policy, use the same configuration as above:
+
+- `PCMode = 4`  
+- `VSContrl = 5`
+
+
+
+`Implementation notes:`   
+
+
+
+
+
+
+
+
 
 
