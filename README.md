@@ -45,3 +45,8 @@ There are two ways to utilize the NREL ROSCO (pitch) controller for this wind tu
 An alternative approach involves using the ROSCO controller as a Simulink block. This can be constructed from the ROSCO toolbox files available in the repository: https://github.com/NREL/ROSCO/tree/main/Matlab_Toolbox
 
 **Note:** The ROSCO Simulink toolbox is no longer actively maintained. Therefore, compatibility issues and errors might be possible. For this reason, we prefer the first option (further considerations for this approach are discussed later in the repository). However, we present this second option because it offers a pathway to generalize policy transfer to other controllers (not ROSCO) and turbine models within the Simulink environment. 
+
+
+## 2. Policy transfer
+
+

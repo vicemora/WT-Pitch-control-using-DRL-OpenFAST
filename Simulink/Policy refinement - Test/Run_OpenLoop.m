@@ -21,7 +21,7 @@ env = rlSimulinkEnv(mdl,agentblk,observationInfo,actionInfo);
 %% Initialize agent
 
 rate = 1; % Rate limiter value
-agent = load('../agents/agent_policy_transfer.mat','saved_agent');
+agent = load('../agents/agent_policy_refinement.mat','saved_agent');
 agent = agent.saved_agent;
 agent.SampleTime=Ts; 
 %% Evaluate agent

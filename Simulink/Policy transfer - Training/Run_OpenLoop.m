@@ -2,7 +2,7 @@ clear all;
 clc;
 %% Path to files
 FAST_InputFileName = '..\..\WT Model\IEA3.4-RWT-OpenFAST\IEA-3.4-130-RWT.fst';
-
+Ts = 0.5; %control timestep/0.025 OpenFAST timestep
 %% Simulink configuration
 mdl = 'OpenLoop';
 agentblk = [mdl '/RL Agent'];
@@ -54,7 +54,6 @@ agent.AgentOptions.InfoToSave.Target=true;
 
 %% RL training configuration
 
-Ts = 0.5; %cbontrol timestep/0.025 OpenFAST timestep
 TMax = 6000; % Total simulation Time 
 maxepisodes = 1; %non-episodic task 
 maxsteps = ceil((TMax/maxepisodes)/Ts);
