@@ -120,6 +120,7 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
                    OutList             - The next line(s) contains a list of output parameters.  See OutListParameters.xlsx for a listing of available output channels, (-)
 "BldPitch1"
 "GenSpeed"
+"LSSGagVxa"
 "RotSpeed"
 "NcIMURAys"
 "NcIMUTAxs"
@@ -127,6 +128,6 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
 "RootMyc2"
 "RootMyc3"
 "Azimuth"
-
+"PtchPMzc1"
 END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
 ---------------------------------------------------------------------------------------

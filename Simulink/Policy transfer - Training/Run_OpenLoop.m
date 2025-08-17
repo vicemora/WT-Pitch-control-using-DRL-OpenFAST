@@ -3,14 +3,15 @@ clc;
 %% Path to files
 FAST_InputFileName = '..\..\WT Model\IEA3.4-RWT-OpenFAST\IEA-3.4-130-RWT.fst';
 Ts = 0.5; %control timestep/0.025 OpenFAST timestep
+TMax=6000; % seconds
 %% Simulink configuration
 mdl = 'OpenLoop';
 agentblk = [mdl '/RL Agent'];
 open_system(mdl); 
-% rng('default')
+rng('default')
 
 %% Create RL enviroment
-n_states = 5; % [power_error, power_error', wind_speed, current_pitch, rotor_speed]
+n_states = 5; % [wind_speed,power_error, power_error', current_pitch, rotor_speed]
 observationInfo = rlNumericSpec([n_states 1],'LowerLimit', ...
             -inf*ones(n_states,1),'UpperLimit',inf*ones(n_states,1));
 n_actions = 301;
@@ -50,26 +51,25 @@ agent.AgentOptions.InfoToSave.ExperienceBuffer=true;
 agent.AgentOptions.InfoToSave.Optimizer=true;
 agent.AgentOptions.InfoToSave.PolicyState=true;
 agent.AgentOptions.InfoToSave.Target=true;
-
+agent.AgentOptions.LearningFrequency = 175;
 
 %% RL training configuration
 
-TMax = 6000; % Total simulation Time 
 maxepisodes = 1; %non-episodic task 
 maxsteps = ceil((TMax/maxepisodes)/Ts);
 training_Opts = rlTrainingOptions(...
 'MaxEpisodes',maxepisodes, ...
 'MaxStepsPerEpisode',maxsteps, ...
-'Verbose',true,...
+'Verbose',false,...
 'StopTrainingCriteria','EpisodeCount',...
 'StopTrainingValue',maxepisodes,...
 'SaveAgentCriteria','EpisodeCount',...
 'SaveAgentValue',maxepisodes,...
-'SaveAgentDirectory', 'policy_refinement'); %directory to save the agent
+'SaveAgentDirectory', 'saved_agent'); %directory to save the agent
 
 
 %% Train agent
 rate = 1; % Rate limiter value
-trainingStats = train(agent,env,trainOpts); 
+trainingStats = train(agent,env,training_Opts); 
 
 
